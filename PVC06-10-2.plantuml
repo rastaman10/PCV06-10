@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+cloud AulaVirtual
+database Curso
+
+usecase Asignatura
+usecase NuevoCurso
+usecase Temas
+usecase Contenidos
+usecase Tareas
+usecase GestionCalificacion
+usecase Matricula
+usecase Examen
+
+actor Alumno
+actor Profesor
+
+AulaVirtual --|> Curso
+Curso ..> Profesor : extends
+Profesor ..> Asignatura : extends
+Asignatura ..> Contenido : gestiona
+
+Contenido ..> Tareas : establece
+Tareas ..> GestionCalificacion : gestiona
+Profesor ..> Examen : establece
+
+Alumno --> Matricula : se
+Matricula --> NuevoCurso
+
+Curso --|> NuevoCurso : included
+NuevoCurso --> Temas : contiene
+Temas --> Contenidos
+@enduml

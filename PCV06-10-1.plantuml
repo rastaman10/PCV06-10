@@ -1,0 +1,37 @@
+@startuml
+entity Empresa 
+
+usecase Producto
+usecase VentaProducto
+usecase Ingreso
+usecase Vende
+usecase Distribuye
+usecase Parte
+
+cloud App
+cloud Cat.Producto
+cloud Precio
+
+actor SocioA
+actor SocioB
+actor Cliente
+
+Empresa --|> Producto: <<include>>
+Producto ..> VentaProducto : <<extends>>
+VentaProducto ..> Ingreso : Genera
+
+Producto -->App : Soporte
+App -->Cat.Producto 
+App -->Precio 
+App -- Cliente : es consultada por
+
+
+Empresa --*SocioA : tiene
+SocioA -->Vende
+SocioA -->Distribuye
+Empresa --*SocioB : tiene
+SocioA --> Producto : retira
+
+SocioB --> Parte : retira
+Parte -->Ingreso : de
+@enduml
